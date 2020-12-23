@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student data</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+    integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ=="
+    crossorigin="anonymous" />
+
+
+  <style>
+    .containerinsert {
+      width: 500px;
+      margin: auto;
+      border: 1.8px solid black;
+      border-radius: 10px;
+    }
+  </style>
+
+</head>
+
+<body>
+  <h1 class="main-header text-center my-3">Student Report Card</h1>
+
+{{#if notify}}
+  <div class="container">
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>Success</strong> {{mssg}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+  </div>
+
+  {{/if}}
+
+
+  <div class="container mt-5">
+    <form action="/search" method="POST" class="my-5">
+      <div class="row py-2 display-flex justify-content-center">
+        <div class="col-4">
+          <input type="text" class="form-control" required placeholder="Search by Student Roll no" name="rollno">
+        </div>
+        <div class="col-2">
+          <button type="submit" class="btn btn-success">Search</button>
+          <a href="/" class="btn btn-primary">Home</a>
+        </div>
+      </div>
+      <h3 class="text-danger text-center">{{err}}</h3>
+    </form>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Roll no</th>
+          <th scope="col">Math</th>
+          <th scope="col">Physics</th>
+          <th scope="col">Chemistry</th>
+          <th scope="col">English</th>
+          <th scope="col">Hindi</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        {{#each array}}
+        <tr>
+          <td>{{this.name}}</td>
+          <td>{{this.rollno}}</td>
+          <td>{{this.math}}</td>
+          <td>{{this.physics}}</td>
+          <td>{{this.chemistry}}</td>
+          <td>{{this.english}}</td>
+          <td>{{this.hindi}}</td>
+          <td>
+            <a href="/update/{{this.id}}"><i class="fa fa-edit mx-1"></i></a>
+            <a href="/delete/{{this.id}}"><i class="fa fa-trash text-danger"></i></a>
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+
+
+
+
+
+  <div class="containerinsert p-4 mt-5">
+    <h3 class="main-header text-center my-3">Add Report Card</h3>
+    <form action="/add" method="POST">
+      <div class="row py-2">
+        <div class="col">
+          <input type="text" class="form-control" placeholder="Name" name="name">
+        </div>
+
+      </div>
+      <div class="row py-2">
+        <div class="col">
+          <input type="number" class="form-control" placeholder="Roll no" name="rollno">
+        </div>
+        <div class="col">
+          <input type="number" class="form-control" placeholder="Math marks" name="math">
+        </div>
+
+      </div>
+      <div class="row py-2">
+        <div class="col">
+          <input type="number" class="form-control" placeholder="Chemistry marks" name="chemistry">
+        </div>
+        <div class="col">
+          <input type="number" class="form-control" placeholder="English marks" name="english">
+        </div>
+      </div>
+      <div class="row py-2">
+        <div class="col">
+          <input type="number" class="form-control" placeholder="Hindi marks" name="hindi">
+        </div>
+        <div class="col">
+          <input type="number" class="form-control" placeholder="Physics marks" name="physics">
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-lg btn-block btn-success">Submit</button>
+    </form>
+
+  </div>
+
+
+
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
